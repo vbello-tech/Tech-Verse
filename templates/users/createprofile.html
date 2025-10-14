@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+CreateUserProfile
+{% endblock title %}
+
+
+{% block body %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Complete Profile...</button>
+
+</form>
+
+{% endblock body %}
