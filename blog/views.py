@@ -15,11 +15,9 @@ class CreateBlogView(CreateView, LoginRequiredMixin):
     model = Blog
     template_name = "blog/create.html"
     form_class = BlogForm
-
-    def get_success_url(self):
-        return reverse("blog:detail", kwargs={
-            'id': self.object.id,
-        })
+    #
+    # def get_success_url(self):
+    #     return reverse(self.object.get_detail())
 
     # save authenticated user if form is valid
     def form_valid(self, form):
@@ -38,3 +36,27 @@ class BlogListView(ListView):
     # Queryset to render all blog from db in order of publish_date (newest first)
     def get_queryset(self):
         return Blog.objects.order_by('-publish_date')
+
+
+class BlogDetailView(View):
+    """
+    View for blog detail
+    """
+    def get(self, slug, *args, **kwargs):
+        blog = Blog.objects.get(slug=slug)
+        context = {
+            # 'form': CommentForm(self.request.POST),
+            'blog': blog
+        }
+        return render(self.request, 'blog/detail.html', context)
+
+    # def post(self, request, slug, *args, **kwargs):
+    #     blog = Blog.objects.get(title=title, slug=slug)
+    #     if request.method == "POST":
+    #         form = CommentForm(request.POST)
+    #         if form.is_valid:
+    #             comment = form.save(commit=False)
+    #             comment.author = request.user
+    #             comment.post = blog
+    #             comment.save()
+    #             return redirect(blog.get_detail())

@@ -7,10 +7,14 @@ Blogs
 
 {% block body %}
 
-{% for article in blogs %}
+<a href="{% url 'blog:create' %}">Add</a>
 
-{{ blog.title }}
-{{ blog.author }}
+{% for article in blogs %}
+<br>
+{{ article.title }}
+<br>
+{{ article.author }}
+<br>
 
 {% endfor %}
 

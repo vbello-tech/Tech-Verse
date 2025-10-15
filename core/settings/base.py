@@ -8,7 +8,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -16,7 +15,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 # Application definition
@@ -36,9 +34,10 @@ PROJECT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'froala_editor',
 
 ]
-INSTALLED_APPS = THIRD_PARTY_APPS+PROJECT_APPS+DJANGO_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + PROJECT_APPS + DJANGO_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -99,7 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -110,7 +107,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -123,3 +119,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
+
+# froala wysiwyg editor
+
+FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'draggable', 'emoticons',
+                         'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image_manager', 'image',
+                         'inline_style', 'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style',
+                         'quick_insert', 'quote', 'save', 'table', 'url', 'video')
+
+FRAOLA_EDITOR_THIRD_PARTY = ('image_aviary', 'spell_checker')
+
+FROALA_INCLUDE_JQUERY = False
+
+FROALA_UPLOAD_PATH = 'froala_uploads/'
