@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, View, ListView
 from .models import Blog
-from .forms import BlogForm
-from django.urls import reverse
+from .forms import BlogForm, CommentForm
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -15,9 +15,6 @@ class CreateBlogView(CreateView, LoginRequiredMixin):
     model = Blog
     template_name = "blog/create.html"
     form_class = BlogForm
-    #
-    # def get_success_url(self):
-    #     return reverse(self.object.get_detail())
 
     # save authenticated user if form is valid
     def form_valid(self, form):
@@ -42,21 +39,31 @@ class BlogDetailView(View):
     """
     View for blog detail
     """
-    def get(self, slug, *args, **kwargs):
+    def get(self, *args, **kwargs):
+        slug = kwargs.get('slug')
         blog = Blog.objects.get(slug=slug)
         context = {
-            # 'form': CommentForm(self.request.POST),
+            'form': CommentForm(self.request.POST),
             'blog': blog
         }
         return render(self.request, 'blog/detail.html', context)
 
-    # def post(self, request, slug, *args, **kwargs):
-    #     blog = Blog.objects.get(title=title, slug=slug)
-    #     if request.method == "POST":
-    #         form = CommentForm(request.POST)
-    #         if form.is_valid:
-    #             comment = form.save(commit=False)
-    #             comment.author = request.user
-    #             comment.post = blog
-    #             comment.save()
-    #             return redirect(blog.get_detail())
+    def post(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        blog = Blog.objects.get(slug=slug)
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid:
+                comment = form.save(commit=False)
+                comment.author = request.user
+                comment.post = blog
+                comment.save()
+                return redirect(blog.get_absolute_url())
+
+
+def like(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    if request.method == "POST":
+        blog.likes.add(request.user)
+        blog.save()
+        return redirect(blog.get_absolute_url())

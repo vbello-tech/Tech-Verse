@@ -11,7 +11,7 @@ Blogs
 
 {% for article in blogs %}
 <br>
-{{ article.title }}
+<a href="{{ article.get_absolute_url }}"> {{ article.title }}</a>
 <br>
 {{ article.author }}
 <br>

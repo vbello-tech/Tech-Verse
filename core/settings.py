@@ -1,3 +1,4 @@
+# settings for asgi
 """
 Django settings for core project.
 """
@@ -6,7 +7,7 @@ from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -14,33 +15,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 ALLOWED_HOSTS = []
 
 # Application definition
-# Application definition
 
-DJANGO_APPS = [
+INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
-
-PROJECT_APPS = [
     'users',
     'blog',
     'short',
     'chat',
-]
-
-THIRD_PARTY_APPS = [
-    'daphne',
     'froala_editor',
     'channels',
 ]
-INSTALLED_APPS = THIRD_PARTY_APPS + PROJECT_APPS + DJANGO_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+# WSGI_APPLICATION = 'core.wsgi.application'
 
 # Add at the bottom of settings.py:
 ASGI_APPLICATION = 'core.asgi.application'
@@ -136,20 +132,37 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User"
-LOGIN_URL = "user:login"
-LOGOUT_URL = "user:logout"
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
-# froala wysiwyg editor
 
-FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'draggable', 'emoticons',
-                         'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image_manager', 'image',
-                         'inline_style', 'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style',
-                         'quick_insert', 'quote', 'save', 'table', 'url', 'video')
+# LOGGING TO FILE (warning.log)
 
-FRAOLA_EDITOR_THIRD_PARTY = ('image_aviary', 'spell_checker')
-
-FROALA_INCLUDE_JQUERY = False
-
-FROALA_UPLOAD_PATH = 'froala_uploads/'
+LOGGING = {
+    "version": 1,
+    'disable_existing_loggers': False,
+    "formatters": {
+        "verbose": {
+            "format": "{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'chat.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+    "root": {"level": "INFO", "handlers": ["file"]},
+}

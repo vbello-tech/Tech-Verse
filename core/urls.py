@@ -10,6 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("users.urls", namespace='user')),
     path('blog/', include("blog.urls", namespace='blog')),
+    path('short/', include("short.urls", namespace='short')),
+    path('chat/', include("chat.urls", namespace='chat')),
     path('froala_editor/', include('froala_editor.urls')),
 ]
 
@@ -17,3 +19,5 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

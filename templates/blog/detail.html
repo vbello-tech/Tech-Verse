@@ -10,5 +10,28 @@ Create Blog Post
 {% block body %}
 
 {{ blog.title }}
+{{ blog.body|safe }}
+<br>
+likes:{{ blog.likes.count }}
+
+<br>
+<form  method="POST"  action="{% url 'blog:like' blog.slug %}">
+    {% csrf_token %}
+    <button type="submit">Like</button>
+</form>
+<br>
+
+<form  method="POST" >
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">ADD...</button>
+</form>
+
+{% for comment in blog.comment.all %}
+<br>
+    {{ comment.author }}
+<br>
+    {{ comment.comment }}
+{% endfor %}
 
 {% endblock body %}

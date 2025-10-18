@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shorts
+{% endblock title %}
+
+
+{% block body %}
+
+<!--<a href="{% url 'blog:create' %}">Add</a>-->
+
+{% for post in shorts %}
+<br>
+<video src="{{ post.content.url }}" controls autoplay loop></video>
+<br>
+{{ post.publish_date }}
+<br>
+
+
+
+{% endfor %}
+
+{% endblock body %}

@@ -17,8 +17,11 @@
         <li>
             <a  href="/">Home</a>
         </li>
-         <li>
+        <li>
             <a  href="{% url 'blog:list' %}">Blog</a>
+        </li>
+        <li>
+            <a  href="{% url 'short:list' %}">Short</a>
         </li>
         {% if user.is_authenticated %}
         <li>
