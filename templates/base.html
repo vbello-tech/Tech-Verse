@@ -27,6 +27,9 @@
         <li>
             <a  href="{% url 'chat:index' %}">Chat</a>
         </li>
+        <li>
+            <a  href="{% url 'chat:dm_inbox' %}">DM</a>
+        </li>
         {% if user.is_authenticated %}
         <li>
             <a href="{% url 'user:profile' %}">{{ user }}</a>
