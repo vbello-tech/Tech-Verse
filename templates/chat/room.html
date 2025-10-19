@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+ <a  href="{% url 'chat:index' %}">Chats</a>
     <h1>{{ room.name }}</h1>
     <h2>{{ request.user.username }}</h2>
     <div id="chat-log">

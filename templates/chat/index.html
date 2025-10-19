@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chat Rooms</title>
-    <style>
+{% extends 'base.html' %}
+
+{% block title %}
+Chat Room
+{% endblock title %}
+
+{% block head_extra %}
+<style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
         h1 { color: #333; }
         .room-list { list-style: none; padding: 0; }
@@ -13,8 +16,10 @@
         }
         .room-list a:hover { background: #0056b3; }
     </style>
-</head>
-<body>
+{% endblock head_extra %}
+
+{% block body %}
+
     <h1>Chat Rooms</h1>
     <ul class="room-list">
         {% for room in rooms %}
@@ -23,5 +28,5 @@
             <li>No rooms available. Create one in the admin panel.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+
+{% endblock body %}
