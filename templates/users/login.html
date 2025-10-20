@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block title %}
 Login
 {% endblock title %}
@@ -14,6 +16,9 @@ Login
 
     <button type="submit">Login...</button>
 
+    <br><a class="button secondaryAction" href="{% url 'user:password_reset' %}">Forgot Password?</a><br>
+
+
 </form>
 
-{% endblock body %}
+{% endblock %}

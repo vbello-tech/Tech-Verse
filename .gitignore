@@ -26,4 +26,10 @@ templates/users/__pycache__/
 users/__pycache__/
 users/migrations/__pycache__/
 __pycache__/
+.DS_Store
+templates/registration/__pycache__/
+
+
+napss2025
+
 
