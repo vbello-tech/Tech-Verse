@@ -11,5 +11,7 @@ urlpatterns = [
     path('dm/start/<str:username>/', views.start_dm, name='start_dm'),
     path('users/', views.user_list, name='user_list'),
     # group chat
+    path('create-room/', views.create_room, name="create_rooms"),
+    # path('rooms/', views.rooms, name='all_rooms'),
     path('<slug:slug>/', views.room, name='room'),
 ]

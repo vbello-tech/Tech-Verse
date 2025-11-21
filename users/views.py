@@ -47,7 +47,7 @@ class SignupView(View):
                 # plain_message = strip_tags(html_message)
                 # mail.send_mail(subject, plain_message, settings.EMAIL_HOST_USER, [user.email],
                 #                html_message=html_message)
-                return redirect('/')
+                return redirect('user:login')
         else:
             form = NewUserForm()
 

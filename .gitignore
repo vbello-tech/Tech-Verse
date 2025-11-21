@@ -10,7 +10,7 @@ froala_uploads/
 BlogImage/
 PostUploads/
 blog/__pycache__/
-blog/migrations/
+blog/migrations/__pycache__/
 chat/__pycache__/
 chat/migrations/__pycache__/
 core/__pycache__/

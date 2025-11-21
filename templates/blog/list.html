@@ -6,6 +6,8 @@ Blogs
 
 
 {% block body %}
+{% if blogs %}
+
 
 <a href="{% url 'blog:create' %}">Add</a>
 
@@ -17,5 +19,11 @@ Blogs
 <br>
 
 {% endfor %}
+
+{% else %}
+
+<h1>No Blog yet.</h1>
+
+{% endif %}
 
 {% endblock body %}

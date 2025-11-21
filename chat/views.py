@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Room, Message, Conversation, DirectMessage
 from django.contrib.auth import get_user_model
+from .forms import CreateRoomForm
 
 User = get_user_model()
+
 
 # Create your views here.
 
@@ -11,6 +13,18 @@ User = get_user_model()
 def index(request):
     rooms = Room.objects.all()
     return render(request, 'chat/index.html', {'rooms': rooms})
+
+
+def create_room(request):
+    if request.method == 'POST':
+        form = CreateRoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('chat:index')
+    else:
+        form = CreateRoomForm(request.POST)
+    context = {'form': form}
+    return render(request, 'chat/create_room.html', context)
 
 
 @login_required

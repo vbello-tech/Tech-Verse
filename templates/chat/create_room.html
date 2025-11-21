@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create a Room</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #333; }
+        .user-list { list-style: none; padding: 0; }
+        .user-item {
+            padding: 15px; border: 1px solid #ddd; margin: 10px 0;
+            border-radius: 5px; background: white;
+        }
+        .user-item a {
+            text-decoration: none; color: #007bff; font-size: 18px; font-weight: bold;
+        }
+        .user-item a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+ <a href="/" class="back-link">← Home</a>
+    <h1>Create a room</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Create...</button>
+    </form>
+
+
+    <a href="{% url 'chat:dm_inbox' %}">Back to Inbox</a>
+</body>
+</html>

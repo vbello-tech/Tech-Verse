@@ -14,6 +14,7 @@ class Room(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='group_members')
 
     def __str__(self):
         return self.name
